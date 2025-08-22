@@ -6,169 +6,124 @@
   <title>Belmar Tech Academy</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
       background: #000; /* black background */
       color: #FFD700; /* gold text */
+      text-align: center;
     }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
+    a { text-decoration: none; color: inherit; }
     button {
       cursor: pointer;
       border: none;
-      border-radius: 8px;
-      padding: 12px 24px;
+      border-radius: 25px;
+      padding: 15px 30px;
       background-color: #FFD700;
       color: #000;
       font-weight: bold;
-      transition: all 0.2s;
+      font-size: 1em;
+      transition: all 0.3s ease;
     }
-    button:hover {
-      background-color: #e6c200;
+    button:hover { 
+      background-color: #e6c200; 
+      transform: translateY(-3px);
     }
 
-    /* Header */
     header {
-      text-align: center;
-      padding: 80px 20px;
+      padding: 100px 20px 50px;
     }
-    header h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
+    header h1 { font-size: 3.2em; margin-bottom: 15px; letter-spacing: 1px; }
+    header p { font-size: 1.3em; max-width: 700px; margin: 0 auto 30px; line-height: 1.5; }
+
+    section {
+      padding: 60px 20px;
     }
-    header p {
-      font-size: 1.3em;
-      margin-bottom: 30px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
+    .section-title {
+      font-size: 2.8em;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #FFD700;
+      display: inline-block;
+      padding-bottom: 5px;
     }
 
-    /* Courses */
-    section.courses-section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-    section.courses-section h2 {
-      font-size: 2.5em;
-      margin-bottom: 40px;
-    }
-    .course-category {
-      margin-bottom: 50px;
-    }
+    .course-category { margin-bottom: 60px; }
     .course-category h3 {
       font-size: 2em;
       margin-bottom: 25px;
     }
-    .course-cards {
+
+    .course-circles {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 25px;
-    }
-    .course-card {
-      background-color: #111;
-      border: 2px solid #FFD700;
-      padding: 25px 20px;
-      width: 250px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-      transition: transform 0.2s, background-color 0.3s;
-    }
-    .course-card:hover {
-      transform: translateY(-8px);
-      background-color: #222;
-    }
-    .course-card h4 {
-      margin-bottom: 10px;
-      font-size: 1.5em;
-    }
-    .course-card p {
-      color: #FFD700;
-      font-size: 14px;
+      gap: 30px;
     }
 
-    /* Footer */
+    .course-circle {
+      width: 140px;
+      height: 140px;
+      background-color: #111;
+      border: 2px solid #FFD700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+    }
+
+    .course-circle:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+    }
+
     footer {
       text-align: center;
       padding: 30px 20px;
-      background-color: #000;
-      color: #FFD700;
+      background: #000;
       font-size: 14px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .course-cards {
-        flex-direction: column;
-        align-items: center;
-      }
+      border-top: 1px solid #FFD700;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>Belmar Tech Academy</h1>
-    <p>Master Cloud, DevOps, and Programming with lifetime access and internship support</p>
-    <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})">View Courses</button>
-  </header>
+<header>
+  <h1>Belmar Tech Academy</h1>
+  <p>Master Cloud, DevOps, and Programming with lifetime access and internship support</p>
+  <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">View Courses</button>
+</header>
 
-  <!-- Courses Section -->
-  <section id="courses" class="courses-section">
-    <h2>Our Courses</h2>
+<section id="courses">
+  <h2 class="section-title">Our Courses</h2>
 
-    <div class="course-category">
-      <h3>Cloud & DevOps</h3>
-      <div class="course-cards">
-        <div class="course-card">
-          <h4>AWS</h4>
-          <p>Learn cloud computing, deployment, and infrastructure on AWS.</p>
-        </div>
-        <div class="course-card">
-          <h4>Azure</h4>
-          <p>Build scalable applications and services on Microsoft Azure.</p>
-        </div>
-        <div class="course-card">
-          <h4>GCP</h4>
-          <p>Explore Google Cloud Platform and master cloud technologies.</p>
-        </div>
-        <div class="course-card">
-          <h4>Terraform</h4>
-          <p>Automate infrastructure with Terraform and Infrastructure as Code.</p>
-        </div>
-        <div class="course-card">
-          <h4>Kubernetes</h4>
-          <p>Orchestrate containers and manage scalable applications.</p>
-        </div>
-      </div>
+  <div class="course-category">
+    <h3>Cloud & DevOps</h3>
+    <div class="course-circles">
+      <a href="aws.html" class="course-circle">AWS</a>
+      <a href="azure.html" class="course-circle">Azure</a>
+      <a href="gcp.html" class="course-circle">GCP</a>
+      <a href="terraform.html" class="course-circle">Terraform</a>
+      <a href="kubernetes.html" class="course-circle">Kubernetes</a>
     </div>
+  </div>
 
-    <div class="course-category">
-      <h3>Programming</h3>
-      <div class="course-cards">
-        <div class="course-card">
-          <h4>Python</h4>
-          <p>Build powerful applications, scripts, and projects with Python.</p>
-        </div>
-        <div class="course-card">
-          <h4>JavaScript</h4>
-          <p>Create dynamic websites, web apps, and interactive front-end projects.</p>
-        </div>
-      </div>
+  <div class="course-category">
+    <h3>Programming</h3>
+    <div class="course-circles">
+      <a href="python.html" class="course-circle">Python</a>
+      <a href="javascript.html" class="course-circle">JavaScript</a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</p>
-  </footer>
+<footer>
+  <p>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</p>
+</footer>
 
 </body>
 </html>
