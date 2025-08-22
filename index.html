@@ -5,21 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belmar Tech Academy</title>
   <style>
-    /* Fonts & Reset */
-    body, h1, h2, h3, h4, p, button {
+    body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background-color: #000; /* dark mode black background */
+      background: #000; /* black background */
       color: #FFD700; /* gold text */
-      transition: all 0.3s ease;
     }
+
     a {
       text-decoration: none;
       color: inherit;
     }
+
     button {
       cursor: pointer;
       border: none;
@@ -34,11 +32,10 @@
       background-color: #e6c200;
     }
 
-    /* Header / Hero */
+    /* Header */
     header {
       text-align: center;
-      padding: 80px 20px 40px;
-      background-color: #000;
+      padding: 80px 20px;
     }
     header h1 {
       font-size: 3em;
@@ -52,7 +49,7 @@
       margin-right: auto;
     }
 
-    /* Courses Section */
+    /* Courses */
     section.courses-section {
       padding: 60px 20px;
       text-align: center;
@@ -96,41 +93,6 @@
       font-size: 14px;
     }
 
-    /* Offer Section */
-    section.offer-section {
-      background-color: #111;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    section.offer-section h2 {
-      font-size: 2.5em;
-      margin-bottom: 40px;
-    }
-    .offer-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-    }
-    .offer-card {
-      background-color: #000;
-      border: 2px solid #FFD700;
-      padding: 25px 20px;
-      width: 280px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
-    }
-    .offer-card h3 {
-      margin-bottom: 15px;
-      font-size: 1.8em;
-    }
-    .offer-card p {
-      color: #FFD700;
-      font-size: 14px;
-      line-height: 1.6;
-      text-align: left;
-    }
-
     /* Footer */
     footer {
       text-align: center;
@@ -142,34 +104,19 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .course-cards, .offer-cards {
+      .course-cards {
         flex-direction: column;
         align-items: center;
       }
-    }
-
-    /* Light mode toggle */
-    body.light-mode {
-      background-color: #FFD700;
-      color: #000;
-    }
-    body.light-mode .course-card, body.light-mode .offer-card {
-      background-color: #fff;
-      border-color: #000;
-      color: #000;
-    }
-    body.light-mode button {
-      background-color: #000;
-      color: #FFD700;
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero Section -->
+  <!-- Header -->
   <header>
     <h1>Belmar Tech Academy</h1>
-    <p>Master Cloud, DevOps, and Programming with AI-assisted teaching and human support</p>
+    <p>Master Cloud, DevOps, and Programming with lifetime access and internship support</p>
     <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})">View Courses</button>
   </header>
 
@@ -182,23 +129,23 @@
       <div class="course-cards">
         <div class="course-card">
           <h4>AWS</h4>
-          <p>Learn cloud computing, deployment, and infrastructure on AWS with AI-assisted learning.</p>
+          <p>Learn cloud computing, deployment, and infrastructure on AWS.</p>
         </div>
         <div class="course-card">
           <h4>Azure</h4>
-          <p>Build scalable applications and services on Microsoft Azure with hands-on projects.</p>
+          <p>Build scalable applications and services on Microsoft Azure.</p>
         </div>
         <div class="course-card">
           <h4>GCP</h4>
-          <p>Explore Google Cloud Platform and master cloud technologies and services.</p>
+          <p>Explore Google Cloud Platform and master cloud technologies.</p>
         </div>
         <div class="course-card">
           <h4>Terraform</h4>
-          <p>Automate infrastructure with Terraform and best practices in Infrastructure as Code.</p>
+          <p>Automate infrastructure with Terraform and Infrastructure as Code.</p>
         </div>
         <div class="course-card">
           <h4>Kubernetes</h4>
-          <p>Orchestrate containers, manage clusters, and deploy scalable apps efficiently.</p>
+          <p>Orchestrate containers and manage scalable applications.</p>
         </div>
       </div>
     </div>
@@ -208,7 +155,7 @@
       <div class="course-cards">
         <div class="course-card">
           <h4>Python</h4>
-          <p>Build applications, scripts, and AI-powered projects with Python.</p>
+          <p>Build powerful applications, scripts, and projects with Python.</p>
         </div>
         <div class="course-card">
           <h4>JavaScript</h4>
@@ -218,37 +165,10 @@
     </div>
   </section>
 
-  <!-- Offer Section -->
-  <section class="offer-section">
-    <h2>🎯 Our Offer</h2>
-    <div class="offer-cards">
-      <div class="offer-card">
-        <h3>Course Access</h3>
-        <p>Lifetime access to all courses with free retakes and internship support.</p>
-      </div>
-      <div class="offer-card">
-        <h3>Pricing</h3>
-        <p>Pay-after-hire model with a $200 registration fee. Total tuition: $3.6K.</p>
-      </div>
-      <div class="offer-card">
-        <h3>AI-assisted Learning</h3>
-        <p>AI assists 90% of teaching while human instructors provide guidance and support 24/7.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer>
     <p>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</p>
   </footer>
-
-  <!-- Optional JS for dark/light mode toggle -->
-  <script>
-    // Toggle mode with click (demo)
-    document.body.addEventListener('dblclick', () => {
-      document.body.classList.toggle('light-mode');
-    });
-  </script>
 
 </body>
 </html>
