@@ -7,27 +7,128 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      background: #f4f4f9;
       margin: 0;
-      padding: 50px;
+      padding: 0;
+      background: #f0f2f5;
+      color: #333;
     }
-    h1 {
-      color: #2c3e50;
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      background: #1e1e1e;
+      color: white;
     }
-    p {
-      color: #555;
+
+    header h1 {
+      margin-bottom: 10px;
     }
-    footer {
-      margin-top: 50px;
+
+    header p {
+      font-size: 18px;
+      margin-top: 0;
+    }
+
+    .courses-section {
+      padding: 50px 20px;
+      text-align: center;
+      background: #f9f9f9;
+    }
+
+    .course-category {
+      margin-bottom: 40px;
+    }
+
+    .course-category h3 {
+      margin-bottom: 20px;
+    }
+
+    .course-cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .course-card {
+      background: white;
+      padding: 20px;
+      width: 250px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .course-card h4 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .course-card p {
+      color: #666;
       font-size: 14px;
-      color: #777;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #1e1e1e;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to Belmar Tech Academy 🚀</h1>
-  <p>This is our very first website hosted with <strong>GitHub Pages</strong>.</p>
-  <footer>© 2025 Belmar Tech Academy</footer>
+
+  <header>
+    <h1>Belmar Tech Academy</h1>
+    <p>Learn Cloud, DevOps, and Full-Stack Development 90% Powered by AI</p>
+    <button onclick="window.location='#courses'">View Courses</button>
+  </header>
+
+  <section id="courses" class="courses-section">
+    <h2>Our Courses</h2>
+
+    <div class="course-category">
+      <h3>Cloud & DevOps</h3>
+      <div class="course-cards">
+        <div class="course-card">
+          <h4>AWS</h4>
+          <p>Learn cloud computing, deployment, and infrastructure on AWS.</p>
+        </div>
+        <div class="course-card">
+          <h4>Terraform</h4>
+          <p>Automate your infrastructure with Terraform and IaC best practices.</p>
+        </div>
+        <div class="course-card">
+          <h4>Kubernetes</h4>
+          <p>Master container orchestration and cluster management.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-category">
+      <h3>Programming</h3>
+      <div class="course-cards">
+        <div class="course-card">
+          <h4>Python</h4>
+          <p>Build powerful applications, scripts, and AI-powered projects.</p>
+        </div>
+        <div class="course-card">
+          <h4>JavaScript</h4>
+          <p>Create dynamic websites, web apps, and interactive front-end projects.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>© 2025 Belmar Tech Academy | Contact us at info@belmartech.com</p>
+  </footer>
+
 </body>
 </html>
