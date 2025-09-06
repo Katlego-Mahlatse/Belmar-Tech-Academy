@@ -6,14 +6,33 @@
   <title>Belmar Tech Academy</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #fff; color: #000; }
-    header { text-align: center; padding: 60px 20px 40px; }
+
+    /* Sticky Navbar */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: #40E0D0; /* turquoise */
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    nav .logo { font-size: 1.5em; font-weight: bold; color: #000; }
+    nav .nav-links a {
+      margin-left: 20px; text-decoration: none;
+      color: #000; font-weight: bold;
+    }
+    nav .nav-links a:hover { color: #001F3F; } /* navy hover */
+
+    header { text-align: center; padding: 120px 20px 40px; }
     header h1 { font-size: 3em; margin-bottom: 15px; }
     header p { font-size: 1.2em; margin-bottom: 25px; }
     button {
       cursor: pointer; border: none; border-radius: 25px; padding: 12px 24px;
-      background-color: #007BFF; color: #fff; font-size: 1em; transition: all 0.3s ease;
+      background-color: #40E0D0; color: #000; font-size: 1em; font-weight: bold;
+      transition: all 0.3s ease;
     }
-    button:hover { background-color: #0056b3; transform: translateY(-3px); }
+    button:hover { background-color: #001F3F; color: #fff; }
+
     section { padding: 40px 20px; text-align: center; }
     .section-title { font-size: 2.2em; margin-bottom: 30px; }
     .course-category { margin-bottom: 50px; }
@@ -22,47 +41,68 @@
     }
     .course-circle {
       width: 140px; height: 140px; border-radius: 50%;
-      background: #007BFF; color: #fff; display: flex;
-      align-items: center; justify-content: center;
-      font-size: 1.1em; font-weight: bold; text-decoration: none;
-      transition: all 0.3s ease;
+      background: #40E0D0; color: #000; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; font-size: 1em; font-weight: bold;
+      text-decoration: none; transition: all 0.3s ease;
+      border: 3px solid #001F3F; /* navy border */
     }
-    .course-circle:hover { background: #0056b3; transform: scale(1.1); }
+    .course-circle img {
+      width: 40px; height: 40px; margin-bottom: 8px;
+    }
+    .course-circle:hover { background: #001F3F; color: #fff; }
+
     footer { text-align: center; padding: 20px; background: #f4f4f4; font-size: 14px; margin-top: 40px; }
   </style>
 </head>
 <body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Belmar</div>
+    <div class="nav-links">
+      <a href="signup.html">Sign Up</a>
+      <a href="login.html">Login</a>
+      <a href="moreinfo.html">More Info</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
   <header>
     <h1>Belmar Tech Academy</h1>
     <p>Master Cloud, DevOps, and Programming with lifetime access and internship support</p>
     <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">View Courses</button>
+    <br><br>
+    <button onclick="window.location.href='payment.html'">Payment Plan</button>
   </header>
 
+  <!-- Courses -->
   <section id="courses">
     <h2 class="section-title">Our Courses</h2>
 
     <div class="course-category">
       <h3>Cloud & DevOps</h3>
       <div class="course-circles">
-        <a href="aws.html" class="course-circle">AWS</a>
-        <a href="azure.html" class="course-circle">Azure</a>
-        <a href="gcp.html" class="course-circle">GCP</a>
-        <a href="terraform.html" class="course-circle">Terraform</a>
-        <a href="kubernetes.html" class="course-circle">Kubernetes</a>
+        <a href="aws.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/aws-2.svg" alt="AWS">AWS</a>
+        <a href="azure.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/microsoft-azure-2.svg" alt="Azure">Azure</a>
+        <a href="gcp.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/google-cloud-1.svg" alt="GCP">GCP</a>
+        <a href="terraform.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/terraform-enterprise.svg" alt="Terraform">Terraform</a>
+        <a href="kubernetes.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/kubernetes.svg" alt="Kubernetes">Kubernetes</a>
       </div>
     </div>
 
     <div class="course-category">
       <h3>Programming</h3>
       <div class="course-circles">
-        <a href="python.html" class="course-circle">Python</a>
-        <a href="javascript.html" class="course-circle">JavaScript</a>
+        <a href="python.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/python-5.svg" alt="Python">Python</a>
+        <a href="javascript.html" class="course-circle"><img src="https://cdn.worldvectorlogo.com/logos/logo-javascript.svg" alt="JavaScript">JavaScript</a>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</p>
   </footer>
+
 </body>
 </html>
