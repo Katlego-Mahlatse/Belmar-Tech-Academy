@@ -4,101 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Belmar Tech Academy</title>
-  <!-- Font Awesome CDN for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f9f9f9; /* light background */
-      color: #333; /* standard text color */
+      background: #f9f9f9;
+      color: #333;
       text-align: center;
     }
-    a { text-decoration: none; color: inherit; }
-
+    header { padding: 100px 20px 50px; }
+    header h1 { font-size: 3.2em; margin-bottom: 15px; }
+    header p { font-size: 1.3em; max-width: 700px; margin: 0 auto 30px; }
     button {
-      cursor: pointer;
-      border: none;
-      border-radius: 25px;
-      padding: 15px 30px;
-      background-color: #007BFF;
-      color: #fff;
-      font-weight: bold;
-      font-size: 1em;
-      transition: all 0.3s ease;
+      border: none; border-radius: 25px; padding: 15px 30px;
+      background: #007BFF; color: #fff; font-weight: bold;
+      cursor: pointer; transition: all 0.3s;
     }
-    button:hover { 
-      background-color: #0056b3; 
-      transform: translateY(-3px);
-    }
-
-    header {
-      padding: 100px 20px 50px;
-    }
-    header h1 { font-size: 3.2em; margin-bottom: 15px; letter-spacing: 1px; }
-    header p { font-size: 1.3em; max-width: 700px; margin: 0 auto 30px; line-height: 1.5; }
-
-    section {
-      padding: 60px 20px;
-    }
-    .section-title {
-      font-size: 2.8em;
-      margin-bottom: 40px;
-      border-bottom: 2px solid #007BFF;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-
-    .course-category { margin-bottom: 60px; }
-    .course-category h3 {
-      font-size: 2em;
-      margin-bottom: 25px;
-    }
-
+    button:hover { background: #0056b3; transform: translateY(-3px); }
+    section { padding: 60px 20px; }
+    .section-title { font-size: 2.5em; margin-bottom: 40px; border-bottom: 2px solid #007BFF; display: inline-block; }
     .course-circles {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;
     }
-
     .course-circle {
-      width: 140px;
-      height: 140px;
-      background-color: #e0e0e0;
-      border: 2px solid #007BFF;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1em;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
+      width: 140px; height: 140px; background: #e0e0e0;
+      border: 2px solid #007BFF; border-radius: 50%;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      font-weight: bold; font-size: 1.1em; cursor: pointer;
+      transition: all 0.3s;
     }
-
-    .course-circle i {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-      color: #007BFF;
-    }
-
-    .course-circle:hover {
-      transform: translateY(-8px);
-      background-color: #cce5ff;
-      border-color: #0056b3;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: #f1f1f1;
-      font-size: 14px;
-      border-top: 1px solid #ccc;
-    }
+    .course-circle:hover { background: #cce5ff; border-color: #0056b3; transform: translateY(-8px); }
+    .course-circle i { font-size: 2.2em; margin-bottom: 8px; color: #007BFF; }
+    footer { background: #f1f1f1; padding: 20px; margin-top: 40px; font-size: 14px; border-top: 1px solid #ccc; }
   </style>
 </head>
 <body>
@@ -111,24 +49,10 @@
 
 <section id="courses">
   <h2 class="section-title">Our Courses</h2>
-
-  <div class="course-category">
-    <h3>Cloud & DevOps</h3>
-    <div class="course-circles">
-      <a href="aws.html" class="course-circle"><i class="fab fa-aws"></i>AWS</a>
-      <a href="azure.html" class="course-circle"><i class="fab fa-microsoft"></i>Azure</a>
-      <a href="gcp.html" class="course-circle"><i class="fas fa-cloud"></i>GCP</a>
-      <a href="terraform.html" class="course-circle"><i class="fas fa-cogs"></i>Terraform</a>
-      <a href="kubernetes.html" class="course-circle"><i class="fas fa-network-wired"></i>Kubernetes</a>
-    </div>
-  </div>
-
-  <div class="course-category">
-    <h3>Programming</h3>
-    <div class="course-circles">
-      <a href="python.html" class="course-circle"><i class="fab fa-python"></i>Python</a>
-      <a href="javascript.html" class="course-circle"><i class="fab fa-js-square"></i>JavaScript</a>
-    </div>
+  <div class="course-circles">
+    <a href="aws.html" class="course-circle"><i class="fab fa-aws"></i>AWS</a>
+    <a href="python.html" class="course-circle"><i class="fab fa-python"></i>Python</a>
+    <a href="javascript.html" class="course-circle"><i class="fab fa-js-square"></i>JavaScript</a>
   </div>
 </section>
 
