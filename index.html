@@ -19,7 +19,12 @@
     nav .logo { font-size: 1.5em; font-weight: bold; color: #000; }
 
     header { text-align: center; padding: 120px 20px 40px; }
-    header h1 { font-size: 3em; margin-bottom: 15px; color: #40E0D0; }
+    header img {
+      max-width: 450px;
+      width: 90%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
     header p { font-size: 1.2em; margin-bottom: 25px; color: #fff; }
     button {
       cursor: pointer; border: none; border-radius: 25px; padding: 12px 24px;
@@ -58,8 +63,9 @@
 
   <!-- Header -->
   <header>
-    <h1>Belmar Tech Academy</h1>
-    <p>Master Cloud, DevOps, and Programming with lifetime access and internship support</p>
+    <!-- Replace big title with image -->
+    <img src="premium_photo-1682088318236-8c4958076b34.jpeg" alt="Belmar Tech Academy">
+    <p>Learn Cloud, DevOps, and Programming with lifetime access and internship support</p>
     <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">View Courses</button>
     <button onclick="window.location.href='payment.html'">Payment Plan</button>
     <br><br>
