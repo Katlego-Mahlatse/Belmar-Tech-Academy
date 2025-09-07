@@ -60,6 +60,10 @@
       font-size: 1em;
       margin: 10px;
     }
+    header button:hover {
+      background-color: #20c0b0;
+      transform: scale(1.05);
+    }
 
     section {
       padding: 60px 20px;
@@ -76,27 +80,39 @@
     /* Courses grid */
     .course-cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 30px;
       justify-items: center;
     }
     .course-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+    .circle {
       width: 120px;
       height: 120px;
       background: #40E0D0;
-      color: black;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: bold;
-      font-size: 1em;
-      text-align: center;
       transition: all 0.3s ease;
     }
-    .course-card:hover {
+    .circle img {
+      width: 60px;
+      height: 60px;
+    }
+    .course-card:hover .circle {
       background: #20c0b0;
       transform: scale(1.05);
+    }
+    .course-name {
+      margin-top: 10px;
+      font-size: 1em;
+      font-weight: bold;
     }
 
     footer {
@@ -127,13 +143,48 @@
 <section id="courses">
   <h2 class="section-title">Our Courses</h2>
   <div class="course-cards">
-    <a href="aws.html" class="course-card">AWS</a>
-    <a href="azure.html" class="course-card">Azure</a>
-    <a href="gcp.html" class="course-card">GCP</a>
-    <a href="terraform.html" class="course-card">Terraform</a>
-    <a href="kubernetes.html" class="course-card">Kubernetes</a>
-    <a href="python.html" class="course-card">Python</a>
-    <a href="javascript.html" class="course-card">JavaScript</a>
+    <a href="aws.html" class="course-card">
+      <div class="circle">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS">
+      </div>
+      <div class="course-name">AWS</div>
+    </a>
+    <a href="azure.html" class="course-card">
+      <div class="circle">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure">
+      </div>
+      <div class="course-name">Azure</div>
+    </a>
+    <a href="gcp.html" class="course-card">
+      <div class="circle">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP">
+      </div>
+      <div class="course-name">GCP</div>
+    </a>
+    <a href="terraform.html" class="course-card">
+      <div class="circle">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform">
+      </div>
+      <div class="course-name">Terraform</div>
+    </a>
+    <a href="kubernetes.html" class="course-card">
+      <div class="circle">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes">
+      </div>
+      <div class="course-name">Kubernetes</div>
+    </a>
+    <a href="python.html" class="course-card">
+      <div class="circle">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+      </div>
+      <div class="course-name">Python</div>
+    </a>
+    <a href="javascript.html" class="course-card">
+      <div class="circle">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+      </div>
+      <div class="course-name">JavaScript</div>
+    </a>
   </div>
 </section>
 
