@@ -6,25 +6,39 @@
   <title>Belmar Tech Academy</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #001f3f; /* navy blue */
+      background: #001f3f; /* navy blue */
       color: white;
     }
+    a { text-decoration: none; color: inherit; }
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 25px;
+      padding: 15px 30px;
+      background-color: #40E0D0; /* turquoise */
+      color: black;
+      font-weight: bold;
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+    button:hover { 
+      background-color: #20c0b0; 
+      transform: translateY(-3px);
+    }
 
-    /* Navbar */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      background: #40E0D0; /* turquoise */
+      background: #40E0D0;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       z-index: 1000;
     }
     nav .logo {
@@ -35,84 +49,71 @@
 
     header {
       text-align: center;
-      padding-top: 70px; /* push below navbar */
+      padding: 120px 20px 50px;
     }
-    .header-img {
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      object-fit: cover;
-      border-bottom: 4px solid black;
+    header img {
+      max-width: 250px;
+      border-radius: 50%;
+      margin-bottom: 20px;
     }
     header p {
-      font-size: 1.3em;
-      margin: 20px auto;
+      font-size: 1.2em;
       max-width: 700px;
+      margin: 0 auto 30px;
+      line-height: 1.5;
     }
-    header button {
-      cursor: pointer;
-      border: none;
-      border-radius: 25px;
-      padding: 15px 30px;
-      background-color: #40E0D0;
-      color: black;
-      font-weight: bold;
-      font-size: 1em;
-      margin: 10px;
-    }
-    header button:hover {
-      background-color: #20c0b0;
-      transform: scale(1.05);
+    .home-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
     }
 
     section {
       padding: 60px 20px;
-      text-align: center;
     }
     .section-title {
       font-size: 2.5em;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       border-bottom: 2px solid #40E0D0;
       display: inline-block;
       padding-bottom: 5px;
     }
 
-    /* Courses grid */
     .course-cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 30px;
       justify-items: center;
     }
+
     .course-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: white;
-    }
-    .circle {
-      width: 120px;
-      height: 120px;
-      background: #40E0D0;
+      background-color: #000;
+      border: 2px solid #40E0D0;
       border-radius: 50%;
+      width: 140px;
+      height: 140px;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3);
       transition: all 0.3s ease;
     }
-    .circle img {
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(64, 224, 208, 0.6);
+    }
+    .course-card img {
       width: 60px;
       height: 60px;
+      margin-bottom: 8px;
     }
-    .course-card:hover .circle {
-      background: #20c0b0;
-      transform: scale(1.05);
-    }
-    .course-name {
-      margin-top: 10px;
-      font-size: 1em;
-      font-weight: bold;
+    .course-card span {
+      font-size: 0.9em;
+      color: white;
     }
 
     footer {
@@ -135,9 +136,12 @@
 <header>
   <img src="premium_photo-1682088318236-8c4958076b34.jpeg" alt="Belmar Tech Academy" class="header-img">
   <p>Learn Cloud, DevOps, and Programming with 5 years access and internship support</p>
-  <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">View Courses</button>
-  <button onclick="document.getElementById('payment').scrollIntoView({behavior:'smooth'})">Payment Plan</button>
-  <a href="join.html"><button>Join Program</button></a>
+  <div class="home-buttons">
+    <a href="#courses"><button>View Courses</button></a>
+    <a href="payment.html"><button>Payment Plan</button></a>
+    <a href="join.html"><button>Join Program</button></a>
+    <a href="moreinfo.html"><button>More Info</button></a>
+  </div>
 </header>
 
 <!-- Courses -->
@@ -145,54 +149,34 @@
   <h2 class="section-title">Our Courses</h2>
   <div class="course-cards">
     <a href="aws.html" class="course-card">
-      <div class="circle">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS">
-      </div>
-      <div class="course-name">AWS</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS">
+      <span>AWS</span>
     </a>
     <a href="azure.html" class="course-card">
-      <div class="circle">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Microsoft_Azure.svg" alt="Azure">
-      </div>
-      <div class="course-name">Azure</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure">
+      <span>Azure</span>
     </a>
     <a href="gcp.html" class="course-card">
-      <div class="circle">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP">
-      </div>
-      <div class="course-name">GCP</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP">
+      <span>GCP</span>
     </a>
     <a href="terraform.html" class="course-card">
-      <div class="circle">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform">
-      </div>
-      <div class="course-name">Terraform</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform">
+      <span>Terraform</span>
     </a>
     <a href="kubernetes.html" class="course-card">
-      <div class="circle">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes">
-      </div>
-      <div class="course-name">Kubernetes</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes">
+      <span>Kubernetes</span>
     </a>
     <a href="python.html" class="course-card">
-      <div class="circle">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-      </div>
-      <div class="course-name">Python</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+      <span>Python</span>
     </a>
     <a href="javascript.html" class="course-card">
-      <div class="circle">
-        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-      </div>
-      <div class="course-name">JavaScript</div>
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
+      <span>JavaScript</span>
     </a>
   </div>
-</section>
-
-<!-- Payment -->
-<section id="payment">
-  <h2 class="section-title">Payment Plan</h2>
-  <p>Details about payments will go here...</p>
 </section>
 
 <!-- Footer -->
