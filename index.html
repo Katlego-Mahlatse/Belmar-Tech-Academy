@@ -47,49 +47,46 @@
       color: black;
     }
 
-    /* Circle menu button */
+    /* Menu button */
     .menu-btn {
       width: 40px;
       height: 40px;
-      background: #001f3f; /* navy */
       border-radius: 50%;
+      background: #001f3f;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 4px;
       cursor: pointer;
-      margin-right: 30px; /* moved left more */
+      position: absolute;
+      right: 20px;
+      top: 10px;
     }
     .menu-btn div {
       width: 20px;
-      height: 3px;
-      background: #40E0D0; /* turquoise lines */
-      border-radius: 2px;
+      height: 2px;
+      background: #40E0D0;
+      margin: 3px 0;
     }
-
-    /* Popup menu */
     .menu-popup {
       display: none;
-      position: absolute;
+      position: fixed;
       top: 60px;
       right: 20px;
-      background: #001f3f;
+      background: #000;
       border: 1px solid #40E0D0;
       border-radius: 10px;
-      padding: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      padding: 15px;
+      z-index: 2000;
     }
     .menu-popup a {
       display: block;
       padding: 10px;
-      color: #40E0D0;
-      font-weight: bold;
+      color: white;
+      font-size: 1em;
+      transition: 0.3s;
     }
     .menu-popup a:hover {
-      background: #40E0D0;
-      color: black;
-      border-radius: 5px;
+      color: #40E0D0;
     }
 
     header {
@@ -100,7 +97,7 @@
       width: 100%;
       max-height: 400px;
       object-fit: cover;
-      border-radius: 0; /* full block */
+      border-radius: 0;
       margin-bottom: 20px;
     }
     header p {
@@ -111,13 +108,10 @@
     }
     .home-buttons {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       gap: 15px;
       margin-top: 20px;
-    }
-    .home-buttons a:last-child {
-      order: 99; /* moves More Info to the end */
     }
 
     section {
@@ -127,7 +121,6 @@
       font-size: 2.5em;
       margin-bottom: 40px;
       text-align: center;
-      border: none; /* no underline */
     }
 
     .course-cards {
@@ -138,8 +131,8 @@
     }
 
     .course-card {
-      background-color: #40E0D0; /* turquoise */
-      border: 2px solid #fff;
+      background-color: #40E0D0;
+      border: 2px solid #40E0D0;
       border-radius: 50%;
       width: 140px;
       height: 140px;
@@ -148,12 +141,12 @@
       justify-content: center;
       flex-direction: column;
       text-align: center;
-      box-shadow: 0 4px 15px rgba(64, 224, 208, 0.5);
+      box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3);
       transition: all 0.3s ease;
     }
     .course-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(64, 224, 208, 0.8);
+      box-shadow: 0 8px 25px rgba(64, 224, 208, 0.6);
     }
     .course-card img {
       width: 60px;
@@ -163,6 +156,7 @@
     .course-card span {
       font-size: 0.9em;
       color: black;
+      font-weight: bold;
     }
 
     footer {
@@ -180,15 +174,19 @@
 <nav>
   <div class="logo">Belmar</div>
   <div class="menu-btn" onclick="toggleMenu()">
-    <div></div><div></div><div></div>
-  </div>
-  <div class="menu-popup" id="menuPopup">
-    <a href="contact.html">Contact Us</a>
-    <a href="chatbot.html">Chat Bot</a>
-    <a href="moreinfo.html">More Info</a>
-    <a href="login.html">Login</a>
+    <div></div>
+    <div></div>
+    <div></div>
   </div>
 </nav>
+
+<!-- Popup Menu -->
+<div class="menu-popup" id="menuPopup">
+  <a href="contact.html">Contact Us</a>
+  <a href="chat.html">Chat Bot</a>
+  <a href="moreinfo.html">More Info</a>
+  <a href="login.html">Login</a>
+</div>
 
 <!-- Header -->
 <header>
@@ -204,7 +202,7 @@
 
 <!-- Courses -->
 <section id="courses">
-  <h2 class="section-title">Our Courses</h2>
+  <h2 class="section-title">You'll Learn</h2>
   <div class="course-cards">
     <a href="aws.html" class="course-card">
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
@@ -234,6 +232,10 @@
       <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
       <span>JavaScript</span>
     </a>
+    <a href="cyber.html" class="course-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Cyber Security">
+      <span>Cyber Security</span>
+    </a>
   </div>
 </section>
 
@@ -243,19 +245,10 @@
 </footer>
 
 <script>
-function toggleMenu() {
-  const popup = document.getElementById("menuPopup");
-  popup.style.display = popup.style.display === "block" ? "none" : "block";
-}
-
-// Close popup if clicking outside
-document.addEventListener("click", function(event) {
-  const menu = document.getElementById("menuPopup");
-  const btn = document.querySelector(".menu-btn");
-  if (!menu.contains(event.target) && !btn.contains(event.target)) {
-    menu.style.display = "none";
+  function toggleMenu() {
+    const menu = document.getElementById('menuPopup');
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
   }
-});
 </script>
 
 </body>
