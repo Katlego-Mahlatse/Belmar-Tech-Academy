@@ -57,9 +57,7 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      position: absolute;
-      right: 20px;
-      top: 10px;
+      margin-right: 10px; /* ensure it’s fully visible */
     }
     .menu-btn div {
       width: 20px;
@@ -129,6 +127,11 @@
       gap: 30px;
       justify-items: center;
     }
+    @media (max-width: 600px) {
+      .course-cards {
+        grid-template-columns: repeat(2, 1fr); /* 2 per row on mobile */
+      }
+    }
 
     .course-card {
       background-color: #40E0D0;
@@ -196,7 +199,6 @@
     <a href="#courses"><button>View Courses</button></a>
     <a href="payment.html"><button>Payment Plan</button></a>
     <a href="join.html"><button>Join Program</button></a>
-    <a href="moreinfo.html"><button>More Info</button></a>
   </div>
 </header>
 
@@ -233,8 +235,16 @@
       <span>JavaScript</span>
     </a>
     <a href="cyber.html" class="course-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Cyber Security">
+      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Cyber Security">
       <span>Cyber Security</span>
+    </a>
+    <a href="ai.html" class="course-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="AI">
+      <span>Artificial Intelligence</span>
+    </a>
+    <a href="data.html" class="course-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Data Engineering">
+      <span>Data Engineering</span>
     </a>
   </div>
 </section>
