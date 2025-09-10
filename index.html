@@ -1,349 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Belmar Tech Academy</title>
   <style>
-    body {
+    :root{ --navy:#001f3f; --turq:#40E0D0; }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #001f3f; /* navy blue */
-      color: white;
+      background:var(--navy);
+      color:#fff;
     }
-    a { text-decoration: none; color: inherit; }
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 25px;
-      padding: 15px 30px;
-      background-color: #40E0D0; /* turquoise */
-      color: black;
-      font-weight: bold;
-      font-size: 1em;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 12px #40E0D0; /* always glowing */
+    a{color:inherit;text-decoration:none}
+
+    /* NAV */
+    nav{
+      position:fixed;
+      top:0;left:0;right:0;
+      height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:10px 20px; /* keeps icons away from edge */
+      background:var(--turq);
+      z-index:1000;
     }
-    button:hover {  
-      transform: translateY(-3px);
+    .logo{font-weight:700;color:black;font-size:1.25rem}
+
+    /* top-right icons group (moved left from edge via padding + margin-right) */
+    .top-icons{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-right:20px; /* pulls group left so menu circle visible */
     }
 
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #40E0D0;
-      padding: 10px 15px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
+    /* icon circle shared style */
+    .icon-circle{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--navy);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 10px var(--turq); /* always glow */
+      flex-shrink:0;
     }
-    nav .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: black;
+    .icon-circle img{
+      width:60%;
+      height:60%;
+      display:block;
+      border-radius:50%;
     }
-
-    .top-icons {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-right: 20px; /* keeps group away from edge */
-    }
-
-    .top-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #001f3f;
-      box-shadow: 0 0 10px #40E0D0;
+    .lang-icon{
+      font-weight:700;
+      color:var(--turq);
+      font-size:13px;
+      user-select:none;
     }
 
-    .lang-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 14px;
-      font-weight: bold;
-      background: #001f3f; /* navy */
-      color: #40E0D0; /* turquoise */
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      user-select: none;
-      box-shadow: 0 0 10px #40E0D0;
-      text-align: center;
+    /* menu button circle (kept visible, small) */
+    .menu-btn{
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--navy);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 10px var(--turq);
+      cursor:pointer;
+    }
+    .menu-btn div{
+      width:14px;
+      height:2px;
+      background:var(--turq);
+      margin:2px 0;
+      border-radius:2px;
     }
 
-    /* Menu button */
-    .menu-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #001f3f;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      cursor: pointer;
-      box-shadow: 0 0 10px #40E0D0;
+    /* popup menu */
+    .menu-popup{
+      position:fixed;
+      top:64px;
+      right:20px;
+      width:200px;
+      background:#000;
+      border:1px solid var(--turq);
+      border-radius:8px;
+      padding:10px;
+      transform:translateY(-10px) scale(.98);
+      opacity:0;
+      pointer-events:none;
+      transition:all .18s ease;
+      z-index:1200;
     }
-    .menu-btn div {
-      width: 20px;
-      height: 3px;
-      background: #40E0D0;
-      margin: 2px 0;
-      border-radius: 2px;
+    .menu-popup.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+    .menu-popup a{display:block;color:#fff;padding:8px 6px;border-radius:4px;font-size:.95rem}
+    .menu-popup a:hover{color:var(--turq)}
+
+    /* HEADER + slideshow (fixed: keep full image orientation) */
+    header{
+      padding:110px 18px 48px; /* room for fixed nav */
+      text-align:center;
     }
 
-    /* Popup menu */
-    .menu-popup {
-      position: fixed;
-      top: 60px;
-      right: 20px;
-      background: #000;
-      border: 1px solid #40E0D0;
-      border-radius: 10px;
-      padding: 15px;
-      z-index: 2000;
-      opacity: 0;
-      transform: translateY(-20px) scale(0.95);
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .menu-popup.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: auto;
-      animation: popupBounce 0.3s ease;
-    }
-    @keyframes popupBounce {
-      0% { transform: translateY(-20px) scale(0.95); opacity: 0; }
-      60% { transform: translateY(5px) scale(1.02); opacity: 1; }
-      100% { transform: translateY(0) scale(1); }
-    }
-    .menu-popup a {
-      display: block;
-      padding: 10px;
-      color: white;
-      font-size: 1em;
-      transition: 0.3s;
-    }
-    .menu-popup a:hover {
-      color: #40E0D0;
+    .slideshow-container{
+      position:relative;
+      width:100%;
+      padding-top:56.25%; /* preserves area, avoids cropping */
+      overflow:hidden;
+      background:var(--navy);
+      margin-bottom:18px;
     }
 
-    header {
-      text-align: center;
-      padding: 120px 20px 50px;
+    /* slides are full-size within container; object-fit: contain keeps full image orientation */
+    .slide{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      transition:opacity 1s ease-in-out;
+    }
+    .slide img{
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain; /* <-- preserves full image (no crop) */
+      display:block;
+    }
+    .slide.active{opacity:1}
+
+    header p{
+      margin:0 auto 18px;
+      max-width:720px;
+      line-height:1.5;
+      font-size:1.05rem;
     }
 
-    /* Slideshow with proper full image orientation */
-    .slideshow-container {
-      position: relative;
-      width: 100%;
-      max-height: 400px;
-      overflow: hidden;
-      margin-bottom: 20px;
+    .home-buttons{display:flex;flex-direction:column;gap:12px;align-items:center}
+    button{
+      border:none;border-radius:25px;padding:12px 26px;background:var(--turq);color:black;font-weight:700;
+      cursor:pointer;box-shadow:0 0 18px var(--turq);transition:transform .18s ease,box-shadow .18s;
     }
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: auto;
-      max-height: 400px;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-    .slide.active {
-      opacity: 1;
-    }
+    button:hover{transform:translateY(-3px);box-shadow:0 0 28px var(--turq)}
 
-    header p {
-      font-size: 1.2em;
-      max-width: 700px;
-      margin: 0 auto 30px;
-      line-height: 1.5;
-    }
-    .home-buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
+    /* courses */
+    section{padding:56px 18px}
+    .section-title{font-size:2.3rem;margin-bottom:28px;text-align:center}
+    .course-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;justify-items:center}
+    .course-card{width:140px;height:140px;border-radius:50%;background:var(--turq);border:2px solid var(--turq);
+      display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 20px var(--turq);transition:transform .18s}
+    .course-card:hover{transform:translateY(-8px)}
+    .course-card img{width:60px;height:60px;margin-bottom:8px}
+    .course-card span{font-weight:700;color:black;font-size:.9rem}
 
-    section {
-      padding: 60px 20px;
-    }
-    .section-title {
-      font-size: 2.5em;
-      margin-bottom: 40px;
-      text-align: center;
-    }
+    footer{padding:26px 18px;background:#000;border-top:1px solid var(--turq);text-align:center;font-size:.95rem}
 
-    .course-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 30px;
-      justify-items: center;
-    }
-    @media (max-width: 600px) {
-      .course-cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .course-card {
-      background-color: #40E0D0;
-      border: 2px solid #40E0D0;
-      border-radius: 50%;
-      width: 140px;
-      height: 140px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      box-shadow: 0 0 15px #40E0D0; /* always glowing */
-      transition: all 0.3s ease;
-    }
-    .course-card img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 8px;
-    }
-    .course-card span {
-      font-size: 0.9em;
-      color: black;
-      font-weight: bold;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: #000;
-      font-size: 14px;
-      border-top: 1px solid #40E0D0;
+    @media(max-width:768px){
+      header{padding:95px 12px 32px}
+      .top-icons{margin-right:12px}
+      .slideshow-container{padding-top:50%}
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav>
-  <div class="logo">Belmar</div>
-  <div class="top-icons">
-    <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile" class="top-icon"></a>
-    <div class="lang-icon" title="Change Language">A 文</div>
-    <div class="menu-btn" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Belmar</div>
+
+    <!-- icons group: profile | language | menu -->
+    <div class="top-icons" aria-hidden="false">
+      <!-- profile (unsplash/whatsapp-style head) -->
+      <a href="login.html" class="icon-circle" title="Profile">
+        <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="profile">
+      </a>
+
+      <!-- language icon (A + Chinese char style) -->
+      <div class="icon-circle lang-icon" title="Language">A 文</div>
+
+      <!-- menu circle (kept visible) -->
+      <div class="menu-btn" onclick="toggleMenu()" aria-label="Open menu" title="Menu">
+        <div></div><div></div><div></div>
+      </div>
     </div>
+  </nav>
+
+  <!-- POPUP MENU (Payment Plan moved here; More Info last) -->
+  <div id="menuPopup" class="menu-popup" aria-hidden="true">
+    <a href="payment.html">Payment Plan</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="chat.html">Chat Bot</a>
+    <a href="login.html">Login</a>
+    <a href="moreinfo.html">More Info</a>
   </div>
-</nav>
 
-<!-- Popup Menu -->
-<div class="menu-popup" id="menuPopup">
-  <a href="contact.html">Contact Us</a>
-  <a href="chat.html">Chat Bot</a>
-  <a href="payment.html">Payment Plan</a>
-  <a href="login.html">Login</a>
-  <a href="moreinfo.html">More Info</a>
-</div>
+  <!-- HEADER with 4-image slideshow (full orientation preserved) -->
+  <header>
+    <div class="slideshow-container" aria-hidden="false">
+      <div class="slide active"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/IMG_20250909_003738.jpg" alt="slide1"></div>
+      <div class="slide"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1587620962725-abab7fe55159.jpeg" alt="slide2"></div>
+      <div class="slide"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1605711285791-0219e80e43a3.jpeg" alt="slide3"></div>
+      <div class="slide"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/premium_photo-1682130140577-42043a2c07d1.jpeg" alt="slide4"></div>
+    </div>
 
-<!-- Header -->
-<header>
-  <div class="slideshow-container">
-    <img class="slide active" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/IMG_20250909_003738.jpg" alt="">
-    <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1587620962725-abab7fe55159.jpeg" alt="">
-    <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1605711285791-0219e80e43a3.jpeg" alt="">
-    <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/premium_photo-1682130140577-42043a2c07d1.jpeg" alt="">
-  </div>
-  <p>Learn Cloud, DevOps, and Programming with 5 years access and internship support</p>
-  <div class="home-buttons">
-    <a href="#courses"><button>View Courses</button></a>
-    <a href="start.html"><button>Start Free Trial</button></a>
-    <a href="join.html"><button>Join Program</button></a>
-  </div>
-</header>
+    <p>Learn Cloud, DevOps, and Programming with 5 years access and internship support</p>
 
-<!-- Courses -->
-<section id="courses">
-  <h2 class="section-title">You'll Learn</h2>
-  <div class="course-cards">
-    <a href="aws.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS">
-      <span>AWS</span>
-    </a>
-    <a href="azure.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure">
-      <span>Azure</span>
-    </a>
-    <a href="gcp.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP">
-      <span>GCP</span>
-    </a>
-    <a href="terraform.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform">
-      <span>Terraform</span>
-    </a>
-    <a href="kubernetes.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes">
-      <span>Kubernetes</span>
-    </a>
-    <a href="python.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
-      <span>Python</span>
-    </a>
-    <a href="javascript.html" class="course-card">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-      <span>JavaScript</span>
-    </a>
-    <a href="cyber.html" class="course-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Cyber Security">
-      <span>Cyber Security</span>
-    </a>
-    <a href="ai.html" class="course-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="AI">
-      <span>Artificial Intelligence</span>
-    </a>
-    <a href="data.html" class="course-card">
-      <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Data Engineering">
-      <span>Data Engineering</span>
-    </a>
-  </div>
-</section>
+    <div class="home-buttons">
+      <a href="#courses"><button type="button">View Courses</button></a>
+      <a href="start.html"><button type="button">Start Free Trial</button></a>
+      <a href="join.html"><button type="button">Join Program</button></a>
+    </div>
+  </header>
 
-<!-- Footer -->
-<footer>
-  <p>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</p>
-</footer>
+  <!-- COURSES -->
+  <section id="courses">
+    <h2 class="section-title">You'll Learn</h2>
+    <div class="course-cards">
+      <a class="course-card" href="aws.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="AWS"><span>AWS</span></a>
+      <a class="course-card" href="azure.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" alt="Azure"><span>Azure</span></a>
+      <a class="course-card" href="gcp.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg" alt="GCP"><span>GCP</span></a>
+      <a class="course-card" href="terraform.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform"><span>Terraform</span></a>
+      <a class="course-card" href="kubernetes.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes"><span>Kubernetes</span></a>
+      <a class="course-card" href="python.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python"><span>Python</span></a>
+      <a class="course-card" href="javascript.html"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JS"><span>JavaScript</span></a>
+      <a class="course-card" href="cyber.html"><img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Cyber"><span>Cyber Security</span></a>
+      <a class="course-card" href="ai.html"><img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" alt="AI"><span>Artificial Intelligence</span></a>
+      <a class="course-card" href="data.html"><img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="Data"><span>Data Engineering</span></a>
+    </div>
+  </section>
 
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('menuPopup');
-    menu.classList.toggle("show");
-  }
+  <footer>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</footer>
 
-  // Slideshow
-  let slideIndex = 0;
-  const slides = document.querySelectorAll(".slide");
+  <script>
+    function toggleMenu(){
+      const el = document.getElementById('menuPopup');
+      el.classList.toggle('show');
+      el.setAttribute('aria-hidden', !el.classList.contains('show'));
+    }
 
-  function showSlides() {
-    slides.forEach((slide, i) => slide.classList.remove("active"));
-    slideIndex++;
-    if (slideIndex > slides.length) { slideIndex = 1; }
-    slides[slideIndex - 1].classList.add("active");
-    setTimeout(showSlides, 2000); // Change every 2 seconds
-  }
-  showSlides();
-</script>
-
+    // slideshow: fade every 2s, images full orientation (object-fit: contain)
+    (function(){
+      const slides = document.querySelectorAll('.slideshow-container .slide');
+      if(!slides || slides.length === 0) return;
+      let idx = 0;
+      function show(){
+        slides.forEach(s => s.classList.remove('active'));
+        slides[idx].classList.add('active');
+        idx = (idx + 1) % slides.length;
+      }
+      show();
+      setInterval(show, 2000);
+    })();
+  </script>
 </body>
 </html>
