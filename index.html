@@ -23,11 +23,12 @@
     font-weight: bold;
     font-size: 1em;
     transition: all 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px #40E0D0; /* always glowing */
   }
   button:hover {
     background-color: #20c0b0;
     transform: translateY(-3px);
-    box-shadow: 0 0 15px #40E0D0;
+    box-shadow: 0 0 25px #40E0D0;
   }
   nav {
     position: fixed;
@@ -56,7 +57,7 @@
     align-items: center;
     flex-direction: column;
     cursor: pointer;
-    margin-right: 20px;
+    margin-left: 10px;
   }
   .menu-btn div {
     width: 22px;
@@ -65,6 +66,28 @@
     margin: 3px 0;
     border-radius: 2px;
   }
+  .top-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .top-icons img, .top-icons .lang-icon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+  .lang-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    background: white;
+    color: black;
+    border-radius: 50%;
+    user-select: none;
+  }
+
   .menu-popup {
     position: fixed;
     top: 60px;
@@ -107,7 +130,7 @@
   .slideshow-container {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* 16:9 aspect ratio */
+    padding-top: 56.25%;
     overflow: hidden;
   }
   .slide {
@@ -161,13 +184,12 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3);
-    transition: all 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+    box-shadow: 0 0 15px #40E0D0;
+    transition: all 0.3s ease;
   }
   .course-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 0 20px #40E0D0;
-    border: 2px solid #40E0D0;
+    box-shadow: 0 0 25px #40E0D0;
   }
   .course-card img { width: 60px; height: 60px; margin-bottom: 8px; }
   .course-card span { font-size: 0.9em; color: black; font-weight: bold; }
@@ -180,7 +202,6 @@
     border-top: 1px solid #40E0D0;
   }
 
-  /* Responsive adjustments */
   @media (max-width: 768px) {
     header { padding: 100px 10px 30px; }
     .slideshow-container { padding-top: 50%; }
@@ -193,25 +214,30 @@
 <!-- Navbar -->
 <nav>
   <div class="logo">Belmar</div>
-  <div class="menu-btn" onclick="toggleMenu()">
-    <div></div>
-    <div></div>
-    <div></div>
+  <div class="top-icons">
+    <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"></a>
+    <div class="lang-icon" title="Change Language">A 文</div>
+    <div class="menu-btn" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </div>
 </nav>
 
 <!-- Popup Menu -->
 <div class="menu-popup" id="menuPopup">
+  <a href="payment.html">Payment Plan</a>
   <a href="contact.html">Contact Us</a>
   <a href="chat.html">Chat Bot</a>
-  <a href="moreinfo.html">More Info</a>
   <a href="login.html">Login</a>
+  <a href="moreinfo.html">More Info</a>
 </div>
 
 <!-- Header with Slideshow -->
 <header>
   <div class="slideshow-container">
-    <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/IMG_20250909_003738.jpg" alt="Slide 1">
+    <img class="slide active" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/IMG_20250909_003738.jpg" alt="Slide 1">
     <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1587620962725-abab7fe55159.jpeg" alt="Slide 2">
     <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1605711285791-0219e80e43a3.jpeg" alt="Slide 3">
     <img class="slide" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/premium_photo-1682130140577-42043a2c07d1.jpeg" alt="Slide 4">
@@ -219,7 +245,7 @@
   <p>Learn Cloud, DevOps, and Programming with 5 years access and internship support</p>
   <div class="home-buttons">
     <a href="#courses"><button>View Courses</button></a>
-    <a href="payment.html"><button>Payment Plan</button></a>
+    <a href="start.html"><button>Start Free Trial</button></a>
     <a href="join.html"><button>Join Program</button></a>
   </div>
 </header>
@@ -282,28 +308,14 @@ function toggleMenu() {
   menu.classList.toggle("show");
 }
 
-// Slideshow with fade
-let slideIndex = 0;
-const slides = document.querySelectorAll(".slide");
-
-function showSlides() {
+// Automatic slideshow
+let slides = document.querySelectorAll(".slide");
+let currentIndex = 0;
+setInterval(() => {
   slides.forEach(s => s.classList.remove("active"));
-  slideIndex++;
-  if (slideIndex > slides.length) { slideIndex = 1; }
-  slides[slideIndex - 1].classList.add("active");
-  setTimeout(showSlides, 2000);
-}
-showSlides();
-
-// Swipe functionality
-let startX = 0;
-document.querySelector('.slideshow-container').addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-document.querySelector('.slideshow-container').addEventListener('touchend', e => {
-  let endX = e.changedTouches[0].clientX;
-  if (endX < startX) { slideIndex = slideIndex % slides.length; }
-  if (endX > startX) { slideIndex = (slideIndex - 2 + slides.length) % slides.length; }
-  showSlides();
-});
+  currentIndex = (currentIndex + 1) % slides.length;
+  slides[currentIndex].classList.add("active");
+}, 2000);
 </script>
 
 </body>
