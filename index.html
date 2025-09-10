@@ -47,9 +47,35 @@
     font-weight: bold;
     color: black;
   }
+  .top-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .top-icon {
+    width: 28px;
+    height: 28px;
+    filter: invert(48%) sepia(83%) saturate(624%) hue-rotate(141deg) brightness(92%) contrast(89%);
+  }
+  .lang-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    background: #001f3f;
+    color: #40E0D0;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    user-select: none;
+    box-shadow: 0 0 10px #40E0D0;
+    text-align: center;
+  }
   .menu-btn {
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
     border-radius: 50%;
     background: #001f3f;
     display: flex;
@@ -57,37 +83,14 @@
     align-items: center;
     flex-direction: column;
     cursor: pointer;
-    margin-left: 10px;
   }
   .menu-btn div {
-    width: 22px;
+    width: 20px;
     height: 3px;
     background: #40E0D0;
     margin: 3px 0;
     border-radius: 2px;
   }
-  .top-icons {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-  .top-icons img, .top-icons .lang-icon {
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-  }
-  .lang-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: bold;
-    background: white;
-    color: black;
-    border-radius: 50%;
-    user-select: none;
-  }
-
   .menu-popup {
     position: fixed;
     top: 60px;
@@ -122,7 +125,6 @@
   }
   .menu-popup a:hover { color: #40E0D0; }
 
-  /* Header and Slideshow */
   header {
     text-align: center;
     padding: 120px 20px 50px;
@@ -211,11 +213,10 @@
 </head>
 <body>
 
-<!-- Navbar -->
 <nav>
   <div class="logo">Belmar</div>
   <div class="top-icons">
-    <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile"></a>
+    <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile" class="top-icon"></a>
     <div class="lang-icon" title="Change Language">A 文</div>
     <div class="menu-btn" onclick="toggleMenu()">
       <div></div>
@@ -225,7 +226,6 @@
   </div>
 </nav>
 
-<!-- Popup Menu -->
 <div class="menu-popup" id="menuPopup">
   <a href="payment.html">Payment Plan</a>
   <a href="contact.html">Contact Us</a>
@@ -234,7 +234,6 @@
   <a href="moreinfo.html">More Info</a>
 </div>
 
-<!-- Header with Slideshow -->
 <header>
   <div class="slideshow-container">
     <img class="slide active" src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/IMG_20250909_003738.jpg" alt="Slide 1">
@@ -250,7 +249,6 @@
   </div>
 </header>
 
-<!-- Courses -->
 <section id="courses">
   <h2 class="section-title">You'll Learn</h2>
   <div class="course-cards">
@@ -297,7 +295,6 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer>
   <p>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</p>
 </footer>
