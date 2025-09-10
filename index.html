@@ -9,25 +9,23 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #001f3f; /* navy */
+      background: #001f3f; /* navy blue */
       color: white;
     }
     a { text-decoration: none; color: inherit; }
-
     button {
       cursor: pointer;
       border: none;
       border-radius: 25px;
       padding: 15px 30px;
-      background-color: #40E0D0;
+      background-color: #40E0D0; /* turquoise */
       color: black;
       font-weight: bold;
       font-size: 1em;
       transition: all 0.3s ease;
-      box-shadow: 0 0 15px #40E0D0; /* glow always */
+      box-shadow: 0 0 12px #40E0D0; /* always glowing */
     }
-    button:hover {
-      background-color: #20c0b0;
+    button:hover {  
       transform: translateY(-3px);
     }
 
@@ -49,31 +47,35 @@
       color: black;
     }
 
-    /* Top right icons */
     .top-icons {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-right: 20px; /* space from edge */
+      margin-right: 20px; /* keeps group away from edge */
     }
+
     .top-icon {
       width: 28px;
       height: 28px;
       border-radius: 50%;
+      background: #001f3f;
       box-shadow: 0 0 10px #40E0D0;
     }
+
     .lang-icon {
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: bold;
-      background: #001f3f;
-      color: #40E0D0;
+      background: #001f3f; /* navy */
+      color: #40E0D0; /* turquoise */
       border-radius: 50%;
       width: 28px;
       height: 28px;
+      user-select: none;
       box-shadow: 0 0 10px #40E0D0;
+      text-align: center;
     }
 
     /* Menu button */
@@ -87,13 +89,13 @@
       align-items: center;
       flex-direction: column;
       cursor: pointer;
-      box-shadow: 0 0 12px #40E0D0;
+      box-shadow: 0 0 10px #40E0D0;
     }
     .menu-btn div {
       width: 20px;
       height: 3px;
       background: #40E0D0;
-      margin: 3px 0;
+      margin: 2px 0;
       border-radius: 2px;
     }
 
@@ -130,33 +132,40 @@
       font-size: 1em;
       transition: 0.3s;
     }
-    .menu-popup a:hover { color: #40E0D0; }
-
-    /* Slideshow */
-    .slideshow-container {
-      position: relative;
-      width: 100%;
-      max-height: 400px;
-      overflow: hidden;
+    .menu-popup a:hover {
+      color: #40E0D0;
     }
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      object-fit: cover;
-    }
-    .slide.active { opacity: 1; }
 
     header {
       text-align: center;
       padding: 120px 20px 50px;
     }
+
+    /* Slideshow */
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 0;
+      margin-bottom: 20px;
+    }
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+
     header p {
       font-size: 1.2em;
       max-width: 700px;
-      margin: 20px auto 30px;
+      margin: 0 auto 30px;
       line-height: 1.5;
     }
     .home-buttons {
@@ -167,7 +176,9 @@
       margin-top: 20px;
     }
 
-    section { padding: 60px 20px; }
+    section {
+      padding: 60px 20px;
+    }
     .section-title {
       font-size: 2.5em;
       margin-bottom: 40px;
@@ -181,7 +192,9 @@
       justify-items: center;
     }
     @media (max-width: 600px) {
-      .course-cards { grid-template-columns: repeat(2, 1fr); }
+      .course-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     .course-card {
@@ -195,12 +208,8 @@
       justify-content: center;
       flex-direction: column;
       text-align: center;
-      box-shadow: 0 0 20px #40E0D0;
+      box-shadow: 0 0 15px #40E0D0; /* always glowing */
       transition: all 0.3s ease;
-    }
-    .course-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 30px #40E0D0;
     }
     .course-card img {
       width: 60px;
@@ -229,7 +238,7 @@
   <div class="logo">Belmar</div>
   <div class="top-icons">
     <a href="login.html"><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile" class="top-icon"></a>
-    <div class="lang-icon">A 文</div>
+    <div class="lang-icon" title="Change Language">A 文</div>
     <div class="menu-btn" onclick="toggleMenu()">
       <div></div>
       <div></div>
@@ -326,11 +335,15 @@
   const slides = document.querySelectorAll(".slide");
 
   function showSlides() {
-    slides.forEach(s => s.classList.remove("active"));
-    slideIndex = (slideIndex + 1) % slides.length;
-    slides[slideIndex].classList.add("active");
+    slides.forEach((slide, i) => {
+      slide.classList.remove("active");
+    });
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    slides[slideIndex - 1].classList.add("active");
+    setTimeout(showSlides, 2000); // Change every 2 seconds
   }
-  setInterval(showSlides, 2000);
+  showSlides();
 </script>
 
 </body>
