@@ -62,23 +62,24 @@
       user-select:none;
     }
 
-    /* menu button circle (kept visible, small) */
+    /* menu button circle (hamburger style fixed) */
     .menu-btn{
       width:28px;
       height:28px;
       border-radius:50%;
       background:var(--navy);
       display:flex;
+      flex-direction:column; /* stack lines */
       align-items:center;
       justify-content:center;
       box-shadow:0 0 10px var(--turq);
       cursor:pointer;
+      gap:3px; /* spacing between lines */
     }
     .menu-btn div{
       width:14px;
       height:2px;
       background:var(--turq);
-      margin:2px 0;
       border-radius:2px;
     }
 
@@ -155,7 +156,12 @@
     /* courses */
     section{padding:56px 18px}
     .section-title{font-size:2.3rem;margin-bottom:28px;text-align:center}
-    .course-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:26px;justify-items:center}
+    .course-cards{
+      display:grid;
+      grid-template-columns:repeat(2,1fr); /* force 2 per row */
+      gap:26px;
+      justify-items:center
+    }
     .course-card{width:140px;height:140px;border-radius:50%;background:var(--turq);border:2px solid var(--turq);
       display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 20px var(--turq);transition:transform .18s}
     .course-card:hover{transform:translateY(-8px)}
