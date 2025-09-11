@@ -173,6 +173,11 @@
       .top-icons{margin-right:12px}
       .slideshow-container{padding-top:50%}
     }
+
+    /* hide Google Translate */
+    #google_translate_element { display:none; }
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display:none !important; }
+    body { top:0px !important; }
   </style>
 </head>
 <body>
@@ -182,15 +187,15 @@
     <div class="logo">Belmar</div>
     <div class="top-icons">
       <!-- profile -->
-      <div class="icon-circle" onclick="togglePopup('profilePopup')" title="Profile">
+      <div class="icon-circle" onclick="openPopup('profilePopup')" title="Profile">
         <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="profile">
       </div>
 
       <!-- language -->
-      <div class="icon-circle lang-icon" onclick="togglePopup('langPopup')" title="Language">A 文</div>
+      <div class="icon-circle lang-icon" onclick="openPopup('langPopup')" title="Language">A 文</div>
 
       <!-- menu -->
-      <div class="menu-btn" onclick="togglePopup('menuPopup')" aria-label="Open menu" title="Menu">
+      <div class="menu-btn" onclick="openPopup('menuPopup')" aria-label="Open menu" title="Menu">
         <div></div><div></div><div></div>
       </div>
     </div>
@@ -198,26 +203,26 @@
 
   <!-- POPUPS -->
   <div id="menuPopup" class="popup" aria-hidden="true">
-    <a href="payment.html">Payment Plan</a>
-    <a href="contact.html">Contact Us</a>
-    <a href="chat.html">Chat Bot</a>
-    <a href="login.html">Login</a>
-    <a href="moreinfo.html">More Info</a>
+    <a href="payment.html" onclick="closePopup('menuPopup')">Payment Plan</a>
+    <a href="contact.html" onclick="closePopup('menuPopup')">Contact Us</a>
+    <a href="chat.html" onclick="closePopup('menuPopup')">Chat Bot</a>
+    <a href="login.html" onclick="closePopup('menuPopup')">Login</a>
+    <a href="moreinfo.html" onclick="closePopup('menuPopup')">More Info</a>
   </div>
 
   <div id="langPopup" class="popup" aria-hidden="true">
-    <a href="#" onclick="translatePage('en')">🇺🇸 English</a>
-    <a href="#" onclick="translatePage('fr')">🇫🇷 French</a>
-    <a href="#" onclick="translatePage('de')">🇩🇪 German</a>
-    <a href="#" onclick="translatePage('es')">🇪🇸 Spanish</a>
-    <a href="#" onclick="translatePage('it')">🇮🇹 Italian</a>
-    <a href="#" onclick="translatePage('hi')">🇮🇳 Hindi</a>
-    <a href="#" onclick="translatePage('zh-CN')">🇨🇳 Mandarin</a>
+    <a href="#" onclick="selectLanguage('en')">🇺🇸 English</a>
+    <a href="#" onclick="selectLanguage('fr')">🇫🇷 French</a>
+    <a href="#" onclick="selectLanguage('de')">🇩🇪 German</a>
+    <a href="#" onclick="selectLanguage('es')">🇪🇸 Spanish</a>
+    <a href="#" onclick="selectLanguage('it')">🇮🇹 Italian</a>
+    <a href="#" onclick="selectLanguage('hi')">🇮🇳 Hindi</a>
+    <a href="#" onclick="selectLanguage('zh-CN')">🇨🇳 Mandarin</a>
   </div>
 
   <div id="profilePopup" class="popup" aria-hidden="true">
-    <a href="login.html">Login</a>
-    <a href="signup.html">Sign Up</a>
+    <a href="login.html" onclick="closePopup('profilePopup')">Login</a>
+    <a href="signup.html" onclick="closePopup('profilePopup')">Sign Up</a>
   </div>
 
   <!-- HEADER -->
@@ -257,9 +262,10 @@
 
   <footer>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</footer>
 
-  <!-- GOOGLE TRANSLATE -->
-  <div id="google_translate_element" style="display:none;"></div>
+  <!-- GOOGLE TRANSLATE (hidden) -->
+  <div id="google_translate_element"></div>
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <script>
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
@@ -269,20 +275,38 @@
       }, 'google_translate_element');
     }
 
-    function translatePage(lang) {
+    function selectLanguage(lang){
       var select = document.querySelector(".goog-te-combo");
-      if (select) {
+      if(select){
         select.value = lang;
         select.dispatchEvent(new Event("change"));
       }
+      closePopup('langPopup');
     }
 
-    function togglePopup(id){
+    function openPopup(id){
+      // close all other popups first
       document.querySelectorAll('.popup').forEach(p=>p.classList.remove('show'));
       const el = document.getElementById(id);
-      el.classList.toggle('show');
-      el.setAttribute('aria-hidden', !el.classList.contains('show'));
+      el.classList.add('show');
+      el.setAttribute('aria-hidden', false);
     }
+
+    function closePopup(id){
+      const el = document.getElementById(id);
+      el.classList.remove('show');
+      el.setAttribute('aria-hidden', true);
+    }
+
+    // close popups when clicking outside
+    document.addEventListener('click', function(event){
+      if(!event.target.closest('.icon-circle') && !event.target.closest('.popup')){
+        document.querySelectorAll('.popup').forEach(p=>{
+          p.classList.remove('show');
+          p.setAttribute('aria-hidden', true);
+        });
+      }
+    });
 
     // slideshow
     (function(){
@@ -303,7 +327,7 @@
       const userLang = navigator.language || navigator.userLanguage;
       const supportedLangs = ["en","fr","de","es","it","hi","zh-CN"];
       if (supportedLangs.includes(userLang)) {
-        setTimeout(()=>translatePage(userLang), 1000);
+        setTimeout(()=>selectLanguage(userLang), 1000);
       }
     });
   </script>
