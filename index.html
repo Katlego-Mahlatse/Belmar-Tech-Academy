@@ -166,7 +166,14 @@
       display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 20px var(--turq);transition:transform .18s}
     .course-card:hover{transform:translateY(-8px)}
     .course-card img{width:60px;height:60px;margin-bottom:8px}
-    .course-card span{font-weight:700;color:black;font-size:.9rem}
+    .course-card span{
+      font-weight:700;
+      color:black;
+      font-size:.85rem;     /* slightly smaller */
+      text-align:center;    /* keep centered */
+      padding:0 6px;        /* breathing room */
+      word-break:break-word;/* wrap long text */
+    }
 
     footer{padding:26px 18px;background:#000;border-top:1px solid var(--turq);text-align:center;font-size:.95rem}
 
