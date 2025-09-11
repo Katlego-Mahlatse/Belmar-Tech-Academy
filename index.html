@@ -25,7 +25,7 @@
       justify-content:space-between;
       padding:10px 20px;
       background:var(--turq);
-      z-index:1001; /* above banner */
+      z-index:1001;
     }
     .logo{font-weight:700;color:black;font-size:1.25rem}
 
@@ -87,8 +87,6 @@
     /* popup menu shared */
     .popup{
       position:fixed;
-      top:64px;
-      right:20px;
       width:200px;
       background:#000;
       border:1px solid var(--turq);
@@ -98,7 +96,7 @@
       opacity:0;
       pointer-events:none;
       transition:all .18s ease;
-      z-index:1202; /* above nav */
+      z-index:1202;
     }
     .popup.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
     .popup a{display:block;color:#fff;padding:8px 6px;border-radius:4px;font-size:.95rem}
@@ -106,7 +104,7 @@
 
     /* HEADER */
     header{
-      padding:110px 18px 48px; /* will adjust dynamically below for banner height */
+      padding:110px 18px 48px;
       text-align:center;
     }
     .slideshow-container{
@@ -166,8 +164,6 @@
       word-break:break-word;
       line-height:1.2;
     }
-
-    /* stack text for long course names */
     .stacked span{
       display:flex;
       flex-direction:column;
@@ -196,10 +192,8 @@
       <div class="icon-circle" onclick="togglePopup('profilePopup')" title="Profile">
         <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="profile">
       </div>
-
       <!-- language -->
       <div class="icon-circle lang-icon" onclick="togglePopup('langPopup')" title="Language">A 文</div>
-
       <!-- menu -->
       <div class="menu-btn" onclick="togglePopup('menuPopup')" aria-label="Open menu" title="Menu">
         <div></div><div></div><div></div>
@@ -337,6 +331,20 @@
       show();
       setInterval(show, 2000);
     })();
+
+    // adjust nav and header padding based on Google banner
+    function adjustNavForBanner(){
+      const nav = document.querySelector('nav');
+      const header = document.querySelector('header');
+      const banner = document.getElementById('google_translate_element');
+      if(nav && header && banner){
+        const bannerHeight = banner.offsetHeight || 0;
+        nav.style.top = bannerHeight + 'px';
+        header.style.paddingTop = (110 + bannerHeight) + 'px';
+      }
+    }
+    window.addEventListener('load', adjustNavForBanner);
+    window.addEventListener('resize', adjustNavForBanner);
 
     // auto-detect browser language
     document.addEventListener("DOMContentLoaded", function () {
