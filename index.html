@@ -23,21 +23,19 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:10px 20px; /* keeps icons away from edge */
+      padding:10px 20px;
       background:var(--turq);
       z-index:1000;
     }
     .logo{font-weight:700;color:black;font-size:1.25rem}
 
-    /* top-right icons group (moved left from edge via padding + margin-right) */
     .top-icons{
       display:flex;
       align-items:center;
       gap:10px;
-      margin-right:20px; /* pulls group left so menu circle visible */
+      margin-right:20px;
     }
 
-    /* icon circle shared style */
     .icon-circle{
       width:28px;
       height:28px;
@@ -46,8 +44,10 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      box-shadow:0 0 10px var(--turq); /* always glow */
+      box-shadow:0 0 10px var(--turq);
       flex-shrink:0;
+      cursor:pointer;
+      position:relative;
     }
     .icon-circle img{
       width:60%;
@@ -62,19 +62,20 @@
       user-select:none;
     }
 
-    /* menu button circle (hamburger style fixed) */
+    /* menu button */
     .menu-btn{
       width:28px;
       height:28px;
       border-radius:50%;
       background:var(--navy);
       display:flex;
-      flex-direction:column; /* stack lines */
       align-items:center;
       justify-content:center;
       box-shadow:0 0 10px var(--turq);
       cursor:pointer;
-      gap:3px; /* spacing between lines */
+      flex-direction:column;
+      gap:3px;
+      padding:4px 0;
     }
     .menu-btn div{
       width:14px;
@@ -83,8 +84,8 @@
       border-radius:2px;
     }
 
-    /* popup menu */
-    .menu-popup{
+    /* popup menu shared */
+    .popup{
       position:fixed;
       top:64px;
       right:20px;
@@ -99,26 +100,23 @@
       transition:all .18s ease;
       z-index:1200;
     }
-    .menu-popup.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
-    .menu-popup a{display:block;color:#fff;padding:8px 6px;border-radius:4px;font-size:.95rem}
-    .menu-popup a:hover{color:var(--turq)}
+    .popup.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+    .popup a{display:block;color:#fff;padding:8px 6px;border-radius:4px;font-size:.95rem}
+    .popup a:hover{color:var(--turq)}
 
-    /* HEADER + slideshow (fixed: keep full image orientation) */
+    /* HEADER */
     header{
-      padding:110px 18px 48px; /* room for fixed nav */
+      padding:110px 18px 48px;
       text-align:center;
     }
-
     .slideshow-container{
       position:relative;
       width:100%;
-      padding-top:56.25%; /* preserves area, avoids cropping */
+      padding-top:56.25%;
       overflow:hidden;
       background:var(--navy);
       margin-bottom:18px;
     }
-
-    /* slides are full-size within container; object-fit: contain keeps full image orientation */
     .slide{
       position:absolute;
       top:0;
@@ -134,18 +132,16 @@
     .slide img{
       max-width:100%;
       max-height:100%;
-      object-fit:contain; /* <-- preserves full image (no crop) */
+      object-fit:contain;
       display:block;
     }
     .slide.active{opacity:1}
-
     header p{
       margin:0 auto 18px;
       max-width:720px;
       line-height:1.5;
       font-size:1.05rem;
     }
-
     .home-buttons{display:flex;flex-direction:column;gap:12px;align-items:center}
     button{
       border:none;border-radius:25px;padding:12px 26px;background:var(--turq);color:black;font-weight:700;
@@ -156,12 +152,7 @@
     /* courses */
     section{padding:56px 18px}
     .section-title{font-size:2.3rem;margin-bottom:28px;text-align:center}
-    .course-cards{
-      display:grid;
-      grid-template-columns:repeat(2,1fr); /* force 2 per row */
-      gap:26px;
-      justify-items:center
-    }
+    .course-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:26px;justify-items:center}
     .course-card{width:140px;height:140px;border-radius:50%;background:var(--turq);border:2px solid var(--turq);
       display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 20px var(--turq);transition:transform .18s}
     .course-card:hover{transform:translateY(-8px)}
@@ -169,10 +160,10 @@
     .course-card span{
       font-weight:700;
       color:black;
-      font-size:.85rem;     /* slightly smaller */
-      text-align:center;    /* keep centered */
-      padding:0 6px;        /* breathing room */
-      word-break:break-word;/* wrap long text */
+      font-size:.9rem;
+      text-align:center;
+      padding:0 6px;
+      word-break:break-word;
     }
 
     footer{padding:26px 18px;background:#000;border-top:1px solid var(--turq);text-align:center;font-size:.95rem}
@@ -189,26 +180,24 @@
   <!-- NAV -->
   <nav>
     <div class="logo">Belmar</div>
-
-    <!-- icons group: profile | language | menu -->
-    <div class="top-icons" aria-hidden="false">
-      <!-- profile (unsplash/whatsapp-style head) -->
-      <a href="login.html" class="icon-circle" title="Profile">
+    <div class="top-icons">
+      <!-- profile -->
+      <div class="icon-circle" onclick="togglePopup('profilePopup')" title="Profile">
         <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="profile">
-      </a>
+      </div>
 
-      <!-- language icon (A + Chinese char style) -->
-      <div class="icon-circle lang-icon" title="Language">A 文</div>
+      <!-- language -->
+      <div class="icon-circle lang-icon" onclick="togglePopup('langPopup')" title="Language">A 文</div>
 
-      <!-- menu circle (kept visible) -->
-      <div class="menu-btn" onclick="toggleMenu()" aria-label="Open menu" title="Menu">
+      <!-- menu -->
+      <div class="menu-btn" onclick="togglePopup('menuPopup')" aria-label="Open menu" title="Menu">
         <div></div><div></div><div></div>
       </div>
     </div>
   </nav>
 
-  <!-- POPUP MENU (Payment Plan moved here; More Info last) -->
-  <div id="menuPopup" class="menu-popup" aria-hidden="true">
+  <!-- POPUPS -->
+  <div id="menuPopup" class="popup" aria-hidden="true">
     <a href="payment.html">Payment Plan</a>
     <a href="contact.html">Contact Us</a>
     <a href="chat.html">Chat Bot</a>
@@ -216,9 +205,24 @@
     <a href="moreinfo.html">More Info</a>
   </div>
 
-  <!-- HEADER with 4-image slideshow (full orientation preserved) -->
+  <div id="langPopup" class="popup" aria-hidden="true">
+    <a href="#" onclick="translatePage('en')">🇺🇸 English</a>
+    <a href="#" onclick="translatePage('fr')">🇫🇷 French</a>
+    <a href="#" onclick="translatePage('de')">🇩🇪 German</a>
+    <a href="#" onclick="translatePage('es')">🇪🇸 Spanish</a>
+    <a href="#" onclick="translatePage('it')">🇮🇹 Italian</a>
+    <a href="#" onclick="translatePage('hi')">🇮🇳 Hindi</a>
+    <a href="#" onclick="translatePage('zh-CN')">🇨🇳 Mandarin</a>
+  </div>
+
+  <div id="profilePopup" class="popup" aria-hidden="true">
+    <a href="login.html">Login</a>
+    <a href="signup.html">Sign Up</a>
+  </div>
+
+  <!-- HEADER -->
   <header>
-    <div class="slideshow-container" aria-hidden="false">
+    <div class="slideshow-container">
       <div class="slide active"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/IMG_20250909_003738.jpg" alt="slide1"></div>
       <div class="slide"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1587620962725-abab7fe55159.jpeg" alt="slide2"></div>
       <div class="slide"><img src="https://katlego-mahlatse.github.io/Belmar-Tech-Academy/photo-1605711285791-0219e80e43a3.jpeg" alt="slide3"></div>
@@ -253,14 +257,34 @@
 
   <footer>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</footer>
 
+  <!-- GOOGLE TRANSLATE -->
+  <div id="google_translate_element" style="display:none;"></div>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script>
-    function toggleMenu(){
-      const el = document.getElementById('menuPopup');
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,fr,de,es,it,hi,zh-CN',
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+
+    function translatePage(lang) {
+      var select = document.querySelector(".goog-te-combo");
+      if (select) {
+        select.value = lang;
+        select.dispatchEvent(new Event("change"));
+      }
+    }
+
+    function togglePopup(id){
+      document.querySelectorAll('.popup').forEach(p=>p.classList.remove('show'));
+      const el = document.getElementById(id);
       el.classList.toggle('show');
       el.setAttribute('aria-hidden', !el.classList.contains('show'));
     }
 
-    // slideshow: fade every 2s, images full orientation (object-fit: contain)
+    // slideshow
     (function(){
       const slides = document.querySelectorAll('.slideshow-container .slide');
       if(!slides || slides.length === 0) return;
@@ -273,6 +297,15 @@
       show();
       setInterval(show, 2000);
     })();
+
+    // auto-detect browser language
+    document.addEventListener("DOMContentLoaded", function () {
+      const userLang = navigator.language || navigator.userLanguage;
+      const supportedLangs = ["en","fr","de","es","it","hi","zh-CN"];
+      if (supportedLangs.includes(userLang)) {
+        setTimeout(()=>translatePage(userLang), 1000);
+      }
+    });
   </script>
 </body>
 </html>
