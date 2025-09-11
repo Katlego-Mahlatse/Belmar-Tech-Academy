@@ -25,7 +25,7 @@
       justify-content:space-between;
       padding:10px 20px;
       background:var(--turq);
-      z-index:1000;
+      z-index:1001; /* above banner */
     }
     .logo{font-weight:700;color:black;font-size:1.25rem}
 
@@ -98,7 +98,7 @@
       opacity:0;
       pointer-events:none;
       transition:all .18s ease;
-      z-index:1200;
+      z-index:1202; /* above nav */
     }
     .popup.show{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
     .popup a{display:block;color:#fff;padding:8px 6px;border-radius:4px;font-size:.95rem}
@@ -106,7 +106,7 @@
 
     /* HEADER */
     header{
-      padding:110px 18px 48px;
+      padding:110px 18px 48px; /* will adjust dynamically below for banner height */
       text-align:center;
     }
     .slideshow-container{
@@ -181,29 +181,27 @@
       .top-icons{margin-right:12px}
       .slideshow-container{padding-top:50%}
     }
-
-    /* hide Google Translate */
-    #google_translate_element { display:none; }
-    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display:none !important; }
-    body { top:0px !important; }
   </style>
 </head>
 <body>
+
+  <!-- GOOGLE TRANSLATE BANNER -->
+  <div id="google_translate_element"></div>
 
   <!-- NAV -->
   <nav>
     <div class="logo">Belmar</div>
     <div class="top-icons">
       <!-- profile -->
-      <div class="icon-circle" onclick="openPopup('profilePopup')" title="Profile">
+      <div class="icon-circle" onclick="togglePopup('profilePopup')" title="Profile">
         <img src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="profile">
       </div>
 
       <!-- language -->
-      <div class="icon-circle lang-icon" onclick="openPopup('langPopup')" title="Language">A 文</div>
+      <div class="icon-circle lang-icon" onclick="togglePopup('langPopup')" title="Language">A 文</div>
 
       <!-- menu -->
-      <div class="menu-btn" onclick="openPopup('menuPopup')" aria-label="Open menu" title="Menu">
+      <div class="menu-btn" onclick="togglePopup('menuPopup')" aria-label="Open menu" title="Menu">
         <div></div><div></div><div></div>
       </div>
     </div>
@@ -270,8 +268,7 @@
 
   <footer>© 2025 Belmar Tech Academy | Contact: info@belmartech.com</footer>
 
-  <!-- GOOGLE TRANSLATE (hidden) -->
-  <div id="google_translate_element"></div>
+  <!-- GOOGLE TRANSLATE SCRIPT -->
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
   <script>
@@ -292,11 +289,17 @@
       closePopup('langPopup');
     }
 
-    function openPopup(id){
-      document.querySelectorAll('.popup').forEach(p=>p.classList.remove('show'));
+    function togglePopup(id){
       const el = document.getElementById(id);
-      el.classList.add('show');
-      el.setAttribute('aria-hidden', false);
+      const isOpen = el.classList.contains('show');
+      document.querySelectorAll('.popup').forEach(p=>{
+        p.classList.remove('show');
+        p.setAttribute('aria-hidden', true);
+      });
+      if(!isOpen){
+        el.classList.add('show');
+        el.setAttribute('aria-hidden', false);
+      }
     }
 
     function closePopup(id){
@@ -305,7 +308,7 @@
       el.setAttribute('aria-hidden', true);
     }
 
-    // close popups when clicking outside
+    // close popups when clicking outside or scrolling
     document.addEventListener('click', function(event){
       if(!event.target.closest('.icon-circle') && !event.target.closest('.menu-btn') && !event.target.closest('.popup')){
         document.querySelectorAll('.popup').forEach(p=>{
@@ -313,6 +316,12 @@
           p.setAttribute('aria-hidden', true);
         });
       }
+    });
+    document.addEventListener('scroll', function(){
+      document.querySelectorAll('.popup').forEach(p=>{
+        p.classList.remove('show');
+        p.setAttribute('aria-hidden', true);
+      });
     });
 
     // slideshow
